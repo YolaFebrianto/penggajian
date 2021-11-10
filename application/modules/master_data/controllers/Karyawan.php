@@ -82,7 +82,12 @@ class Karyawan extends MX_Controller {
 	public function ajax_karyawan_options(){
 		$id_karyawan = $this->input->post('id_karyawan');
 		$karyawan = $this->model_karyawan->show_karyawan_options($id_karyawan);
-		echo $karyawan->id.'#'.$karyawan->nama.'#'.$karyawan->alamat.'#'.$karyawan->nama_jabatan;
+		$usulan_gaji = $this->model_karyawan->show_usulan_gaji($id_karyawan);
+		//gajitotal/ harikerjasebulan * harikerja2minggu
+		$gaji2minggu = $usulan_gaji->gajipokok/26*14;
+		//lembur = gajilemburjam * jam_lembur
+		//potongan = jml_absen/jml_harikerja2minggu *gajipokok
+		echo $karyawan->id.'#'.$karyawan->nama.'#'.$karyawan->alamat.'#'.$karyawan->nama_jabatan.'#'.$gaji2minggu.'#'.$usulan_gaji->gajipokok.'#'.$usulan_gaji->tunj_jabatan;
 	}
 
 }

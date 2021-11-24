@@ -83,6 +83,8 @@ class Karyawan extends MX_Controller {
 		$id_karyawan = $this->input->post('id_karyawan');
 		$karyawan = $this->model_karyawan->show_karyawan_options($id_karyawan);
 		$usulan_gaji = $this->model_karyawan->show_usulan_gaji($id_karyawan);
+		//gaji_harian = 12.250*jam_kerja
+
 		//gajitotal/ harikerjasebulan * harikerja2minggu
 		$gaji2minggu = $usulan_gaji->gajipokok/26*14;
 		//lembur = gajilemburjam * jam_lembur

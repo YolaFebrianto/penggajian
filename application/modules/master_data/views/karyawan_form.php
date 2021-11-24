@@ -27,6 +27,30 @@ $().ready(function() {
 		</div>
 	</div>
     <div class="form-group">
+        <label class="col-sm-2 control-label input-sm">Tanggal Masuk</label>
+		<div class="col-sm-3">
+           	<div class="input-group date" data-date="" data-date-format="yyyy-mm-dd">
+				<input class="form-control input-sm" type="text" name="tgl_masuk" placeholder="Tanggal Masuk" value="<?php echo $karyawan->tgl_masuk; ?>" required readonly />
+				<span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+            </div>
+		</div>
+	</div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label input-sm">Tempat Lahir</label>
+		<div class="col-sm-3">
+		  <input class="form-control input-sm" type="text" name="tempat_lahir" placeholder="Tempat Lahir" value="<?php echo $karyawan->tempat_lahir; ?>" required />
+		</div>
+	</div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label input-sm">Tanggal Lahir</label>
+		<div class="col-sm-3">
+           	<div class="input-group date" data-date="" data-date-format="yyyy-mm-dd">
+				<input class="form-control input-sm" type="text" name="tgl_lahir" placeholder="Tanggal Lahir" value="<?php echo $karyawan->tgl_lahir; ?>" required readonly />
+				<span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+            </div>
+		</div>
+	</div>
+    <div class="form-group">
         <label class="col-sm-2 control-label input-sm">Alamat</label>
 		<div class="col-sm-4">
 			<textarea name="alamat" class="form-control" rows="3" placeholder="Alamat" required><?php echo $karyawan->alamat; ?></textarea>
@@ -68,21 +92,6 @@ $().ready(function() {
 		</div>
 	</div>
     <div class="form-group">
-        <label class="col-sm-2 control-label input-sm">Tempat Lahir</label>
-		<div class="col-sm-3">
-		  <input class="form-control input-sm" type="text" name="tempat_lahir" placeholder="Tempat Lahir" value="<?php echo $karyawan->tempat_lahir; ?>" required />
-		</div>
-	</div>
-    <div class="form-group">
-        <label class="col-sm-2 control-label input-sm">Tanggal Lahir</label>
-		<div class="col-sm-3">
-           	<div class="input-group date" data-date="" data-date-format="yyyy-mm-dd">
-				<input class="form-control input-sm" type="text" name="tgl_lahir" placeholder="Tanggal Lahir" value="<?php echo $karyawan->tgl_lahir; ?>" required readonly />
-				<span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-            </div>
-		</div>
-	</div>
-    <div class="form-group">
         <label class="col-sm-2 control-label input-sm">Email</label>
 		<div class="col-sm-3">
 		  <input class="form-control input-sm" type="text" name="email" placeholder="Email" value="<?php echo $karyawan->email; ?>" required />
@@ -101,6 +110,7 @@ $().ready(function() {
 				<option value="SMP">SMP</option>
 				<option value="SMA/SMK">SMA/SMK</option>
 				<option value="D1">D1</option>
+				<option value="D2">D2</option>
 				<option value="D3">D3</option>
 				<option value="S1">S1</option>
 				<option value="S2">S2</option>

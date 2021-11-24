@@ -54,6 +54,7 @@ class Karyawan extends MX_Controller {
 	public function update($id){
 		$data = array(
 			'nama' => $this->input->post('nama'),
+			'tgl_masuk' => $this->input->post('tgl_masuk'),
 			'alamat' => $this->input->post('alamat'),
 			'id_jabatan' => $this->input->post('id_jabatan'),
 			'no_telp' => $this->input->post('no_telp'),
@@ -86,10 +87,10 @@ class Karyawan extends MX_Controller {
 		//gaji_harian = 12.250*jam_kerja
 
 		//gajitotal/ harikerjasebulan * harikerja2minggu
-		$gaji2minggu = $usulan_gaji->gajipokok/26*14;
+		// $gaji2minggu = $usulan_gaji->gajipokok/26*14;
 		//lembur = gajilemburjam * jam_lembur
 		//potongan = jml_absen/jml_harikerja2minggu *gajipokok
-		echo $karyawan->id.'#'.$karyawan->nama.'#'.$karyawan->alamat.'#'.$karyawan->nama_jabatan.'#'.$gaji2minggu.'#'.$usulan_gaji->gajipokok.'#'.$usulan_gaji->tunj_jabatan;
+		echo $karyawan->id.'#'.$karyawan->nama.'#'.$karyawan->alamat.'#'.$karyawan->nama_jabatan.'#'.$usulan_gaji->gajipokok.'#'.$usulan_gaji->tunj_jabatan;
 	}
 
 }

@@ -17,6 +17,15 @@
 		</div>
 	</div>
     <div class="form-group">
+        <label class="col-sm-2 control-label input-sm">Jenis</label>
+		<div class="col-sm-3">
+		  <select class="form-control input-sm" name="status">
+		  	<option value="1" <?php echo (@$perkiraan->status==1)?'selected=""':''; ?>>Pendapatan</option>
+		  	<option value="0" <?php echo (@$perkiraan->status==0)?'selected=""':''; ?>>Potongan</option>
+		  </select>
+		</div>
+	</div>
+    <div class="form-group">
         <label class="col-sm-2 control-label input-sm">Aktif</label>
 		<div class="col-sm-4">
 			<?php if ($perkiraan->aktif == 'Y' || $perkiraan->aktif == '') { ?>

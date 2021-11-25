@@ -11,6 +11,23 @@
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 
+-- Dumping structure for table dbpenggajian.ci_sessions
+CREATE TABLE IF NOT EXISTS `ci_sessions` (
+  `id` varchar(40) NOT NULL,
+  `ip_address` varchar(45) NOT NULL,
+  `timestamp` int(10) unsigned NOT NULL DEFAULT '0',
+  `data` blob NOT NULL,
+  KEY `ci_sessions_timestamp` (`timestamp`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Dumping data for table dbpenggajian.ci_sessions: ~0 rows (approximately)
+/*!40000 ALTER TABLE `ci_sessions` DISABLE KEYS */;
+INSERT INTO `ci_sessions` (`id`, `ip_address`, `timestamp`, `data`) VALUES
+	('4fb84b70b22645e847b8a0324e701b0294501c1f', '::1', 1637812002, _binary 0x5F5F63695F6C6173745F726567656E65726174657C693A313633373831323030323B),
+	('7mgsfi503pnmn97o3816lk6dtbb9cj5k', '::1', 1637813123, _binary 0x5F5F63695F6C6173745F726567656E65726174657C693A313633373831333131323B),
+	('e463681f17026a12a02644b89bd5df02b70f9535', '::1', 1637813231, _binary 0x5F5F63695F6C6173745F726567656E65726174657C693A313633373831333138333B);
+/*!40000 ALTER TABLE `ci_sessions` ENABLE KEYS */;
+
 -- Dumping structure for table dbpenggajian.jabatan
 CREATE TABLE IF NOT EXISTS `jabatan` (
   `id` int(11) NOT NULL AUTO_INCREMENT,

@@ -310,12 +310,12 @@ class CI_Session {
 		$this->_config = $params;
 
 		// Security is king
-		// ini_set('session.use_trans_sid', 0);
-		// ini_set('session.use_strict_mode', 1);
-		// ini_set('session.use_cookies', 1);
-		// ini_set('session.use_only_cookies', 1);
-		// ini_set('session.hash_function', 1);
-		// ini_set('session.hash_bits_per_character', 4);
+		ini_set('session.use_trans_sid', 0);
+		ini_set('session.use_strict_mode', 1);
+		ini_set('session.use_cookies', 1);
+		ini_set('session.use_only_cookies', 1);
+		ini_set('session.hash_function', 1);
+		ini_set('session.hash_bits_per_character', 4);
 	}
 
 	// ------------------------------------------------------------------------

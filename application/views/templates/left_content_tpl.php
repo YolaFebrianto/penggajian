@@ -6,7 +6,7 @@
 	<div class="admin">
 		<div class="image">
 			<?php 
-			if ($this->session->userdata('pengguna')->foto != '') $img_photo = @$this->session->userdata('pengguna')->foto;
+			if (@$this->session->userdata('pengguna')->foto != '') $img_photo = @$this->session->userdata('pengguna')->foto;
 			else $img_photo = "foto_default.jpg"; 
 			?>
 			<img src="<?php echo base_url('foto/foto_pengguna/thumbnails/'.$img_photo); ?>" class="img-responsive img-thumbnail" alt="Responsive image" />

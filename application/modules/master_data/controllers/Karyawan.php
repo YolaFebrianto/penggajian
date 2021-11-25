@@ -37,6 +37,7 @@ class Karyawan extends MX_Controller {
 	public function insert(){
 		$data = array(
 			'nama' => $this->input->post('nama'),
+			'tgl_masuk' => $this->input->post('tgl_masuk'),
 			'alamat' => $this->input->post('alamat'),
 			'id_jabatan' => $this->input->post('id_jabatan'),
 			'no_telp' => $this->input->post('no_telp'),

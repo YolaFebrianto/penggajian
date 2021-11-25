@@ -4,6 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Model_karyawan extends CI_Model {
 
 	public	$nama    	  = '';
+	public	$tgl_masuk 	  = '';
 	public	$alamat  	  = '';
 	public	$no_telp 	  = '';
 	public	$jk 	 	  = '';

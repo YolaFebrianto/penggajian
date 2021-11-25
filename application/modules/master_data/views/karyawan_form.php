@@ -30,7 +30,7 @@ $().ready(function() {
         <label class="col-sm-2 control-label input-sm">Tanggal Masuk</label>
 		<div class="col-sm-3">
            	<div class="input-group date" data-date="" data-date-format="yyyy-mm-dd">
-				<input class="form-control input-sm" type="text" name="tgl_masuk" placeholder="Tanggal Masuk" value="<?php echo $karyawan->tgl_masuk; ?>" required readonly />
+				<input class="form-control input-sm" type="text" name="tgl_masuk" placeholder="Tanggal Masuk" value="<?php echo @$karyawan->tgl_masuk; ?>" required readonly />
 				<span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
             </div>
 		</div>

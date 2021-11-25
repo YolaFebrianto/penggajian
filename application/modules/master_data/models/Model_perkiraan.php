@@ -5,6 +5,7 @@ class Model_perkiraan extends CI_Model {
 	
 	public 	$kode	= '';
 	public	$nama   = '';
+	public	$status   = '';
 	public	$aktif  = '';
 	
 	public function get_perkiraan(){

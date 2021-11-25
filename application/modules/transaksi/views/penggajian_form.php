@@ -258,7 +258,7 @@ $().ready(function(){
     <div class="form-group">
         <label class="col-sm-3 control-label input-sm lbl-left">Petugas</label>
 		<div class="col-sm-8">
-		  <input class="form-control input-sm" type="text" name="petugas" placeholder="Petugas" value="<?php echo $this->session->userdata('pengguna')->nama; ?>" readonly />
+		  <input class="form-control input-sm" type="text" name="petugas" placeholder="Petugas" value="<?php echo @$this->session->userdata('pengguna')->nama; ?>" readonly />
 		</div>
 	</div>
 </div>

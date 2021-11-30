@@ -270,7 +270,7 @@ $().ready(function(){
 			<textarea name="alamat" class="form-control" rows="3" placeholder="Alamat"></textarea>
 		</div>
 	</div>
-	<input type="hidden" name="gajitotal" value="12250">
+	<input type="hidden" name="gajitotal" value="12250" placeholder="Gaji Per Jam">
 	<input type="hidden" name="tunj_jabatan" value="0">
 </div>
 

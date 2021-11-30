@@ -36,7 +36,7 @@ function add_penggajian_detail(e){
 	}
 
 	if(nama == 'Gaji Pokok'){
-		var isi_input = gajitotal/hari_kerja_sebulan*hari_kerja_2minggu;
+		var isi_input = Math.ceil(gajitotal/hari_kerja_sebulan*hari_kerja_2minggu);
 		var data_id = 'id="input-gaji-pokok"';
 	} else if(nama =='Tunjangan Jabatan'){
 		var isi_input = tunj_jabatan_val;
@@ -215,7 +215,7 @@ $().ready(function(){
 		var hari_kerja_sebulan = $(this).val();
 		var hari_kerja_2minggu = $('[name=hari_kerja_2minggu]').val();
 		var gajitotal = $('[name=gajitotal]').val();
-		var isi_input = gajitotal/hari_kerja_sebulan*hari_kerja_2minggu;
+		var isi_input = Math.ceil(gajitotal/hari_kerja_sebulan*hari_kerja_2minggu);
 		$('#input-gaji-pokok').val(isi_input);
 		change_jumlah();
 	});
@@ -223,7 +223,7 @@ $().ready(function(){
 		var hari_kerja_sebulan = $('[name=hari_kerja_sebulan]').val();
 		var hari_kerja_2minggu = $(this).val();
 		var gajitotal = $('[name=gajitotal]').val();
-		var isi_input = gajitotal/hari_kerja_sebulan*hari_kerja_2minggu;
+		var isi_input = Math.ceil(gajitotal/hari_kerja_sebulan*hari_kerja_2minggu);
 		$('#input-gaji-pokok').val(isi_input);
 		change_jumlah();
 	});

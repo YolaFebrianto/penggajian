@@ -18,8 +18,7 @@ function add_penggajian_detail(e){
 
 	var gajitotal=$('[name=gajitotal]').val();
 	var tunj_jabatan_val=$('[name=tunj_jabatan]').val();
-	var hari_kerja_sebulan=$('[name=hari_kerja_sebulan]').val();
-	var hari_kerja_2minggu=$('[name=hari_kerja_2minggu]').val();
+	var jam_kerja_2minggu=$('[name=jam_kerja_2minggu]').val();
 	
 	if (perkiraan_arr.indexOf(id_perkiraan) > -1) {
 		alert('Nama perkiraan gaji sudah terdaftar di tabel transaksi gaji!');
@@ -36,7 +35,7 @@ function add_penggajian_detail(e){
 	}
 
 	if(nama == 'Gaji Pokok'){
-		var isi_input = gajitotal/hari_kerja_sebulan*hari_kerja_2minggu;
+		var isi_input = gajitotal*jam_kerja_2minggu;
 		var data_id = 'id="input-gaji-pokok"';
 	} else if(nama =='Tunjangan Jabatan'){
 		var isi_input = tunj_jabatan_val;
@@ -193,7 +192,7 @@ $().ready(function(){
 		var id_karyawan = $(this).val();
 		if (id_karyawan != '') {
 			$.post (
-				'<?php echo site_url('/master_data/karyawan/ajax_karyawan_options'); ?>'
+				'<?php echo site_url('/master_data/karyawan/ajax_karyawan_options2'); ?>'
 				, {
 					id_karyawan : id_karyawan,
 				}
@@ -202,8 +201,7 @@ $().ready(function(){
 					$('[name=nama]').val(karyawan[1]);
 					$('[name=alamat]').val(karyawan[2])
 					$('[name=jabatan]').val(karyawan[3]);
-					$('[name=gajitotal]').val(karyawan[4]);
-					$('[name=tunj_jabatan]').val(karyawan[5]);
+					$('[name=tunj_jabatan]').val(karyawan[4]);
 				}
 			);
 		}
@@ -211,26 +209,17 @@ $().ready(function(){
 	
 	$('a.add').click(add_penggajian_detail);
 
-	$('[name=hari_kerja_sebulan]').keyup(function() {
-		var hari_kerja_sebulan = $(this).val();
-		var hari_kerja_2minggu = $('[name=hari_kerja_2minggu]').val();
+	$('[name=jam_kerja_2minggu]').keyup(function() {
+		var jam_kerja_2minggu = $(this).val();
 		var gajitotal = $('[name=gajitotal]').val();
-		var isi_input = gajitotal/hari_kerja_sebulan*hari_kerja_2minggu;
-		$('#input-gaji-pokok').val(isi_input);
-		change_jumlah();
-	});
-	$('[name=hari_kerja_2minggu]').keyup(function() {
-		var hari_kerja_sebulan = $('[name=hari_kerja_sebulan]').val();
-		var hari_kerja_2minggu = $(this).val();
-		var gajitotal = $('[name=gajitotal]').val();
-		var isi_input = gajitotal/hari_kerja_sebulan*hari_kerja_2minggu;
+		var isi_input = gajitotal*jam_kerja_2minggu;
 		$('#input-gaji-pokok').val(isi_input);
 		change_jumlah();
 	});
 });
 </script>
 
-<h3 class="page-header">Transaksi Penggajian (Harian)</h3>
+<h3 class="page-header">Transaksi Penggajian (Per Jam Kerja)</h3>
 
 <?php echo form_open($action, array('class' => 'form-horizontal row-form')); ?>
 <div class="col-sm-6">
@@ -247,15 +236,9 @@ $().ready(function(){
 		</div>
 	</div>
     <div class="form-group">
-        <label class="col-sm-3 control-label input-sm lbl-left">Hari Kerja (Sebulan)</label>
+        <label class="col-sm-3 control-label input-sm lbl-left">Jam Kerja (2 Minggu)</label>
 		<div class="col-sm-8">
-		  <input class="form-control input-sm" type="number" name="hari_kerja_sebulan" placeholder="Hari Kerja (Sebulan)" value="26" min="1" max="31" value="" id="hk_sebulan" />
-		</div>
-	</div>
-    <div class="form-group">
-        <label class="col-sm-3 control-label input-sm lbl-left">Hari Kerja (2 Minggu)</label>
-		<div class="col-sm-8">
-		  <input class="form-control input-sm" type="number" name="hari_kerja_2minggu" placeholder="Hari Kerja 2 Minggu" value="12" min="1" max="14" value="" id="hk_2minggu" />
+		  <input class="form-control input-sm" type="number" name="jam_kerja_2minggu" placeholder="Jam Kerja 2 Minggu" min="0" value="0" id="jk_2minggu" />
 		</div>
 	</div>
     <div class="form-group">
@@ -287,7 +270,7 @@ $().ready(function(){
 			<textarea name="alamat" class="form-control" rows="3" placeholder="Alamat"></textarea>
 		</div>
 	</div>
-	<input type="hidden" name="gajitotal" value="0">
+	<input type="hidden" name="gajitotal" value="12250">
 	<input type="hidden" name="tunj_jabatan" value="0">
 </div>
 

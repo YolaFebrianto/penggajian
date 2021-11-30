@@ -17,6 +17,13 @@ class Penggajian extends MX_Controller {
 			'perkiraan'		=> $this->db->get_where('perkiraan', array('aktif' => 'Y'))->result(),
 		));
 	}
+
+	public function jam_kerja(){			
+		$this->page->view('penggajian_jam_form', array(
+			'action'	 	=> $this->page->base_url("/insert_transaksi_gaji"),
+			'perkiraan'		=> $this->db->get_where('perkiraan', array('aktif' => 'Y'))->result(),
+		));
+	}
 	
 	public function insert_transaksi_gaji(){		
 		$no_slip = $this->input->post('no_slip');

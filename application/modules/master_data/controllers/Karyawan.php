@@ -94,6 +94,16 @@ class Karyawan extends MX_Controller {
 		echo $karyawan->id.'#'.$karyawan->nama.'#'.$karyawan->alamat.'#'.$karyawan->nama_jabatan.'#'.$usulan_gaji->gajipokok.'#'.$usulan_gaji->tunj_jabatan;
 	}
 
+	public function ajax_karyawan_options2(){
+		$id_karyawan = $this->input->post('id_karyawan');
+		$karyawan = $this->model_karyawan->show_karyawan_options($id_karyawan);
+		$usulan_gaji = $this->model_karyawan->show_usulan_gaji($id_karyawan);
+		//gaji_harian = 12.250*jam_kerja
+
+		//lembur = gajilemburjam * jam_lembur
+		//potongan = jml_absen/jml_harikerja2minggu *gajipokok
+		echo $karyawan->id.'#'.$karyawan->nama.'#'.$karyawan->alamat.'#'.$karyawan->nama_jabatan.'#'.$usulan_gaji->tunj_jabatan;
+	}
 }
 
 /* End of file Karyawan.php */

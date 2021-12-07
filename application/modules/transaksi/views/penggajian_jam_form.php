@@ -1,6 +1,15 @@
 <?php echo jquery_slimscrool(); ?>
 <?php echo jquery_select2(); ?>
+<?php echo bootstrap_datepicker3(); ?>
 
+<script type="text/javascript">
+$().ready(function() {
+	$(".input-group.date").datepicker({ 
+		autoclose: true, 
+		todayHighlight: true 
+	});
+});	
+</script>
 <script type="text/javascript">
 var perkiraan_arr 	= new Array();
 var perkiraan_index = 0;
@@ -224,6 +233,15 @@ $().ready(function(){
 <?php echo form_open($action, array('class' => 'form-horizontal row-form')); ?>
 <div class="col-sm-6">
     <div class="form-group">
+        <label class="col-sm-3 control-label input-sm lbl-left">Periode Dari</label>
+		<div class="col-sm-8">
+           	<div class="input-group date" data-date="" data-date-format="yyyy-mm-dd">
+				<input class="form-control input-sm" type="text" name="periode_dari" placeholder="Periode Dari" value="<?php echo date('Y-m-d',strtotime("-14 days")); ?>" required readonly />
+				<span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+            </div>
+		</div>
+	</div>
+    <div class="form-group">
         <label class="col-sm-3 control-label input-sm lbl-left">No. Slip</label>
 		<div class="col-sm-8">
 		  <input class="form-control input-sm" type="text" name="no_slip" placeholder="No. Slip" value="<?php echo no_slip(); ?>" readonly />
@@ -241,6 +259,9 @@ $().ready(function(){
 		  <input class="form-control input-sm" type="number" name="jam_kerja_2minggu" placeholder="Jam Kerja 2 Minggu" min="0" value="0" id="jk_2minggu" />
 		</div>
 	</div>
+	<input type="hidden" name="hari_kerja_sebulan" placeholder="Hari Kerja (Sebulan)" value="0" value="0" id="hk_sebulan"/>
+	<input type="hidden" name="hari_kerja_2minggu" placeholder="Hari Kerja 2 Minggu" value="0" value="0" id="hk_2minggu"/>
+	<input type="hidden" name="jenis" placeholder="Jenis Penggajian" value="1" id="jenis" />
     <div class="form-group">
         <label class="col-sm-3 control-label input-sm lbl-left">Petugas</label>
 		<div class="col-sm-8">
@@ -249,6 +270,15 @@ $().ready(function(){
 	</div>
 </div>
 <div class="col-sm-6">
+    <div class="form-group">
+        <label class="col-sm-3 control-label input-sm lbl-left">Periode Sampai</label>
+		<div class="col-sm-8">
+           	<div class="input-group date" data-date="" data-date-format="yyyy-mm-dd">
+				<input class="form-control input-sm" type="text" name="periode_sampai" placeholder="Periode Sampai" value="<?php echo date('Y-m-d'); ?>" required readonly />
+				<span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+            </div>
+		</div>
+	</div>
     <div class="form-group">
         <label class="col-sm-3 control-label input-sm lbl-left">Nama</label>
 		<div class="col-sm-8">

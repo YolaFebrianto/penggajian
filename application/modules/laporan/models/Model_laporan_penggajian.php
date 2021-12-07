@@ -35,9 +35,15 @@ class Model_laporan_penggajian extends CI_Model {
 					j.nama AS jabatan,
 					tg.id,
 					tg.tgl_gaji,
+					tg.jenis,
+					tg.hk_sebulan,
+					tg.hk_2minggu,
+					tg.jam_kerja,
 					tg.pendapatan,
 					tg.potongan,
-					tg.gaji_bersih
+					tg.gaji_bersih,
+					tg.periode_dari,
+					tg.periode_sampai
 			FROM transaksi_gaji AS tg
 			LEFT JOIN karyawan AS k
 				ON tg.id_karyawan = k.id

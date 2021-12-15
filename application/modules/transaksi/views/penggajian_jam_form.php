@@ -199,11 +199,15 @@ $().ready(function(){
 		
 	$('[name=id_karyawan]').change(function() {
 		var id_karyawan = $(this).val();
+		var periode_dari = $('[name=periode_dari]').val();
+		var periode_sampai = $('[name=periode_sampai]').val();
 		if (id_karyawan != '') {
 			$.post (
 				'<?php echo site_url('/master_data/karyawan/ajax_karyawan_options2'); ?>'
 				, {
 					id_karyawan : id_karyawan,
+					periode_dari: periode_dari,
+					periode_sampai: periode_sampai
 				}
 				, function(data) {
 					var karyawan = data.split('#');
@@ -211,6 +215,30 @@ $().ready(function(){
 					$('[name=alamat]').val(karyawan[2])
 					$('[name=jabatan]').val(karyawan[3]);
 					$('[name=tunj_jabatan]').val(karyawan[4]);
+					$('[name=jam_kerja_2minggu]').val(karyawan[5]);
+				}
+			);
+		}
+	});
+
+	$('#cariTglPres').click(function() {
+		var id_karyawan = $('[name=id_karyawan]').val();
+		var periode_dari = $('[name=periode_dari]').val();
+		var periode_sampai = $('[name=periode_sampai]').val();
+		if (id_karyawan != '') {
+			$.post (
+				'<?php echo site_url('/master_data/karyawan/ajax_presensi_options2'); ?>'
+				, {
+					id_karyawan : id_karyawan,
+					periode_dari: periode_dari,
+					periode_sampai: periode_sampai
+				}
+				, function(data) {
+					$('[name=jam_kerja_2minggu]').val(data);
+					var gajitotal = $('[name=gajitotal]').val();
+					var isi_input = Math.ceil(gajitotal*data);
+					$('#input-gaji-pokok').val(isi_input);
+					change_jumlah();
 				}
 			);
 		}
@@ -221,7 +249,7 @@ $().ready(function(){
 	$('[name=jam_kerja_2minggu]').keyup(function() {
 		var jam_kerja_2minggu = $(this).val();
 		var gajitotal = $('[name=gajitotal]').val();
-		var isi_input = gajitotal*jam_kerja_2minggu;
+		var isi_input = Math.ceil(gajitotal*jam_kerja_2minggu);
 		$('#input-gaji-pokok').val(isi_input);
 		change_jumlah();
 	});
@@ -272,11 +300,14 @@ $().ready(function(){
 <div class="col-sm-6">
     <div class="form-group">
         <label class="col-sm-3 control-label input-sm lbl-left">Periode Sampai</label>
-		<div class="col-sm-8">
+		<div class="col-sm-7">
            	<div class="input-group date" data-date="" data-date-format="yyyy-mm-dd">
 				<input class="form-control input-sm" type="text" name="periode_sampai" placeholder="Periode Sampai" value="<?php echo date('Y-m-d'); ?>" required readonly />
 				<span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
             </div>
+		</div>
+		<div class="col-sm-1">
+			<a href="#" class="btn btn-default btn-sm button-blue" id="cariTglPres">Cari</a>
 		</div>
 	</div>
     <div class="form-group">
@@ -369,8 +400,8 @@ $().ready(function(){
 	</div>
 	<div class="form-group">
 		<div class="col-sm-offset-3 col-sm-6">
-			<button type="submit" class="btn btn btn-primary btn-sm button-blue" > Simpan </button>
-			<button type="reset" class="btn btn btn-primary btn-sm button-red" > Reset </button>
+			<button type="submit" class="btn btn-primary btn-sm button-blue" > Simpan </button>
+			<button type="reset" class="btn btn-primary btn-sm button-red" > Reset </button>
 		</div>
 	</div>
 </div>

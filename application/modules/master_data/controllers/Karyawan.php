@@ -9,6 +9,7 @@ class Karyawan extends MX_Controller {
 		
 		$this->page->use_directory();
 		$this->load->model('model_karyawan');
+		$this->load->model('model_presensi');
 	}
 	
 	public function index() {		
@@ -83,26 +84,50 @@ class Karyawan extends MX_Controller {
 	
 	public function ajax_karyawan_options(){
 		$id_karyawan = $this->input->post('id_karyawan');
+		$periode_dari = $this->input->post('periode_dari');
+		$periode_sampai = $this->input->post('periode_sampai');
 		$karyawan = $this->model_karyawan->show_karyawan_options($id_karyawan);
 		$usulan_gaji = $this->model_karyawan->show_usulan_gaji($id_karyawan);
+		$harikerja = $this->model_presensi->get_hari_kerja($id_karyawan,$periode_dari,$periode_sampai);
 		//gaji_harian = 12.250*jam_kerja
 
 		//gajitotal/ harikerjasebulan * harikerja2minggu
 		// $gaji2minggu = $usulan_gaji->gajipokok/26*14;
 		//lembur = gajilemburjam * jam_lembur
 		//potongan = jml_absen/jml_harikerja2minggu *gajipokok
-		echo $karyawan->id.'#'.$karyawan->nama.'#'.$karyawan->alamat.'#'.$karyawan->nama_jabatan.'#'.$usulan_gaji->gajipokok.'#'.$usulan_gaji->tunj_jabatan;
+		echo $karyawan->id.'#'.$karyawan->nama.'#'.$karyawan->alamat.'#'.$karyawan->nama_jabatan.'#'.$usulan_gaji->gajipokok.'#'.$usulan_gaji->tunj_jabatan.'#'.$harikerja;
 	}
 
 	public function ajax_karyawan_options2(){
 		$id_karyawan = $this->input->post('id_karyawan');
+		$periode_dari = $this->input->post('periode_dari');
+		$periode_sampai = $this->input->post('periode_sampai');
 		$karyawan = $this->model_karyawan->show_karyawan_options($id_karyawan);
 		$usulan_gaji = $this->model_karyawan->show_usulan_gaji($id_karyawan);
+		$jamkerja = $this->model_presensi->get_jam_kerja($id_karyawan,$periode_dari,$periode_sampai);
+		$jambulat = round(($jamkerja/3600), 2);
 		//gaji_harian = 12.250*jam_kerja
 
 		//lembur = gajilemburjam * jam_lembur
 		//potongan = jml_absen/jml_harikerja2minggu *gajipokok
-		echo $karyawan->id.'#'.$karyawan->nama.'#'.$karyawan->alamat.'#'.$karyawan->nama_jabatan.'#'.$usulan_gaji->tunj_jabatan;
+		echo $karyawan->id.'#'.$karyawan->nama.'#'.$karyawan->alamat.'#'.$karyawan->nama_jabatan.'#'.$usulan_gaji->tunj_jabatan.'#'.$jambulat;
+	}
+
+	public function ajax_presensi_options(){
+		$id_karyawan = $this->input->post('id_karyawan');
+		$periode_dari = $this->input->post('periode_dari');
+		$periode_sampai = $this->input->post('periode_sampai');
+		$harikerja = $this->model_presensi->get_hari_kerja($id_karyawan,$periode_dari,$periode_sampai);
+		echo $harikerja;
+	}
+
+	public function ajax_presensi_options2(){
+		$id_karyawan = $this->input->post('id_karyawan');
+		$periode_dari = $this->input->post('periode_dari');
+		$periode_sampai = $this->input->post('periode_sampai');
+		$jamkerja = $this->model_presensi->get_jam_kerja($id_karyawan,$periode_dari,$periode_sampai);
+		$jambulat = round(($jamkerja/3600), 2);
+		echo $jambulat;
 	}
 }
 

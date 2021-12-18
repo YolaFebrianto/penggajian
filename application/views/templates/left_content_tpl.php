@@ -6,19 +6,19 @@
 	<div class="admin">
 		<div class="image">
 			<?php 
-			if ($this->session->userdata('pengguna')->foto != '') $img_photo = $this->session->userdata('pengguna')->foto;
+			if (@$this->session->userdata('pengguna')->foto != '') $img_photo = @$this->session->userdata('pengguna')->foto;
 			else $img_photo = "foto_default.jpg"; 
 			?>
 			<img src="<?php echo base_url('foto/foto_pengguna/thumbnails/'.$img_photo); ?>" class="img-responsive img-thumbnail" alt="Responsive image" />
 		</div>
 		<ul class="control"> 
-			<li><span class="glyphicon glyphicon-user"></span>  <?php echo $this->session->userdata('pengguna')->nama; ?></li>               
+			<li><span class="glyphicon glyphicon-user"></span>  <?php echo @$this->session->userdata('pengguna')->nama; ?></li>               
 			<li><span class="glyphicon glyphicon-log-out"></span>  <a href="<?php echo site_url('/site/logout'); ?>">Logout</a></li>
 		</ul>
 	</div>
 	<ul class="navigation">
 		<?php
-		$id_pengguna_grup = $this->session->userdata('pengguna')->id_pengguna_grup;
+		$id_pengguna_grup = @$this->session->userdata('pengguna')->id_pengguna_grup;
 		$query = "
 			SELECT m.*, ma.id AS id_menu_akses 
 			FROM menu AS m 

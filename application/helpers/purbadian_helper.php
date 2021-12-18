@@ -3,7 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 function my_number_format($number){
 	if ($number == '') $number = 0;
-	return number_format($number, 2, '.', ',');
+	return number_format($number, 2, '.', '.');
 }
 
 function strip_comma($text){

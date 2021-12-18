@@ -1,6 +1,15 @@
 <?php echo jquery_slimscrool(); ?>
 <?php echo jquery_select2(); ?>
+<?php echo bootstrap_datepicker3(); ?>
 
+<script type="text/javascript">
+$().ready(function() {
+	$(".input-group.date").datepicker({ 
+		autoclose: true, 
+		todayHighlight: true 
+	});
+});	
+</script>
 <script type="text/javascript">
 var perkiraan_arr 	= new Array();
 var perkiraan_index = 0;
@@ -16,8 +25,10 @@ function add_penggajian_detail(e){
 	var elemen = '';
 	var selektor = '';
 
-	var gaji2minggu=$('[name=gaji2minggu]').val();
+	var gajitotal=$('[name=gajitotal]').val();
 	var tunj_jabatan_val=$('[name=tunj_jabatan]').val();
+	var hari_kerja_sebulan=$('[name=hari_kerja_sebulan]').val();
+	var hari_kerja_2minggu=$('[name=hari_kerja_2minggu]').val();
 	
 	if (perkiraan_arr.indexOf(id_perkiraan) > -1) {
 		alert('Nama perkiraan gaji sudah terdaftar di tabel transaksi gaji!');
@@ -34,11 +45,33 @@ function add_penggajian_detail(e){
 	}
 
 	if(nama == 'Gaji Pokok'){
+<<<<<<< HEAD
 		var isi_input = gaji2minggu;
 	} else if(nama =='Tunjangan Jabatan'){
 		var isi_input = tunj_jabatan_val;
 	} else {
 		var isi_input = '';
+=======
+		var isi_input = Math.ceil(gajitotal/hari_kerja_sebulan*hari_kerja_2minggu);
+		var data_id = 'id="input-gaji-pokok"';
+	} else if(nama =='Tunjangan Jabatan'){
+		var isi_input = tunj_jabatan_val;
+	} else if(nama =='BPJS'){
+		var isi_input = 22000;
+	} else if(nama =='Lembur'){
+		var isi_input = 0;
+		var data_id = 'id="input-lembur"';
+	} else if(nama =='Uang Makan'){
+		var lembur=$('#input-lembur').val();
+		if ($('#input-lembur').length) {
+			var isi_input = 12000;
+		} else {
+			var isi_input = 0;
+		}
+	} else {
+		var isi_input = '';
+		var data_id = '';
+>>>>>>> 2fef64a9322c3bc423955e405db935a1819b8092
 	}
 	
 	num_unit++;
@@ -46,7 +79,11 @@ function add_penggajian_detail(e){
 		'<tr id="indent-perkiraan-' + id_perkiraan + '">' +
 			'<td>' + num_unit + '</td>' +
 			'<td class="nama-perkiraan">' + nama + '</td>' + 
+<<<<<<< HEAD
 			'<td><input type="hidden" name="id_perkiraan[' + id_perkiraan + ']" value="' + id_perkiraan + '" /> <input type="text" name="' + elemen + '[' + id_perkiraan + ']" class="' + selektor + ' nominal-perkiraan" data-status="' + status + '" value="'+ isi_input +'" autocomplete="off" /></td>' +
+=======
+			'<td><input type="hidden" name="id_perkiraan[' + id_perkiraan + ']" value="' + id_perkiraan + '" /> <input type="text" name="' + elemen + '[' + id_perkiraan + ']" class="' + selektor + ' nominal-perkiraan" data-status="' + status + '" value="'+ isi_input +'" autocomplete="off" '+ data_id +' /></td>' +
+>>>>>>> 2fef64a9322c3bc423955e405db935a1819b8092
 			'<td align="center"><a href="#' + id_perkiraan + '" data-status="' + status + '" class="del"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>' +
 		'</tr>';
 	
@@ -56,6 +93,7 @@ function add_penggajian_detail(e){
 	e.preventDefault();
 	perkiraan_arr[perkiraan_index] = id_perkiraan;
 	perkiraan_index++;
+	change_jumlah();
 	
 	$('.pendapatan_arr').on('keydown', number_key);
 	$('.pendapatan_arr').on('keyup', change_jumlah);
@@ -174,33 +212,92 @@ $().ready(function(){
 		
 	$('[name=id_karyawan]').change(function() {
 		var id_karyawan = $(this).val();
+		var periode_dari = $('[name=periode_dari]').val();
+		var periode_sampai = $('[name=periode_sampai]').val();
 		if (id_karyawan != '') {
 			$.post (
 				'<?php echo site_url('/master_data/karyawan/ajax_karyawan_options'); ?>'
 				, {
-					id_karyawan : id_karyawan
+					id_karyawan : id_karyawan,
+					periode_dari: periode_dari,
+					periode_sampai: periode_sampai
 				}
 				, function(data) {
 					var karyawan = data.split('#');
 					$('[name=nama]').val(karyawan[1]);
 					$('[name=alamat]').val(karyawan[2])
 					$('[name=jabatan]').val(karyawan[3]);
+<<<<<<< HEAD
 					$('[name=gaji2minggu]').val(karyawan[4]);
 					$('[name=tunj_jabatan]').val(karyawan[6]);
+=======
+					$('[name=gajitotal]').val(karyawan[4]);
+					$('[name=tunj_jabatan]').val(karyawan[5]);
+					$('[name=hari_kerja_2minggu]').val(karyawan[6]);
+>>>>>>> 2fef64a9322c3bc423955e405db935a1819b8092
 				}
 			);
 		}
 	});
 	
+	$('#cariTglPres').click(function() {
+		var id_karyawan = $('[name=id_karyawan]').val();
+		var periode_dari = $('[name=periode_dari]').val();
+		var periode_sampai = $('[name=periode_sampai]').val();
+		if (id_karyawan != '') {
+			$.post (
+				'<?php echo site_url('/master_data/karyawan/ajax_presensi_options'); ?>'
+				, {
+					id_karyawan : id_karyawan,
+					periode_dari: periode_dari,
+					periode_sampai: periode_sampai
+				}
+				, function(data) {
+					$('[name=hari_kerja_2minggu]').val(data);
+					var hari_kerja_sebulan = $('[name=hari_kerja_sebulan]').val();
+					var gajitotal = $('[name=gajitotal]').val();
+					var isi_input = Math.ceil(gajitotal/hari_kerja_sebulan*data);
+					$('#input-gaji-pokok').val(isi_input);
+					change_jumlah();
+				}
+			);
+		}
+	});
+
 	$('a.add').click(add_penggajian_detail);
 
+	$('[name=hari_kerja_sebulan]').keyup(function() {
+		var hari_kerja_sebulan = $(this).val();
+		var hari_kerja_2minggu = $('[name=hari_kerja_2minggu]').val();
+		var gajitotal = $('[name=gajitotal]').val();
+		var isi_input = Math.ceil(gajitotal/hari_kerja_sebulan*hari_kerja_2minggu);
+		$('#input-gaji-pokok').val(isi_input);
+		change_jumlah();
+	});
+	$('[name=hari_kerja_2minggu]').keyup(function() {
+		var hari_kerja_sebulan = $('[name=hari_kerja_sebulan]').val();
+		var hari_kerja_2minggu = $(this).val();
+		var gajitotal = $('[name=gajitotal]').val();
+		var isi_input = Math.ceil(gajitotal/hari_kerja_sebulan*hari_kerja_2minggu);
+		$('#input-gaji-pokok').val(isi_input);
+		change_jumlah();
+	});
 });
 </script>
 
-<h3 class="page-header">Transaksi Penggajian</h3>
+<h3 class="page-header">Transaksi Penggajian (Harian)</h3>
 
 <?php echo form_open($action, array('class' => 'form-horizontal row-form')); ?>
 <div class="col-sm-6">
+    <div class="form-group">
+        <label class="col-sm-3 control-label input-sm lbl-left">Periode Dari</label>
+		<div class="col-sm-8">
+           	<div class="input-group date" data-date="" data-date-format="yyyy-mm-dd">
+				<input class="form-control input-sm" type="text" name="periode_dari" placeholder="Periode Dari" value="<?php echo date('Y-m-d',strtotime("-14 days")); ?>" required readonly />
+				<span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+            </div>
+		</div>
+	</div>
     <div class="form-group">
         <label class="col-sm-3 control-label input-sm lbl-left">No. Slip</label>
 		<div class="col-sm-8">
@@ -214,13 +311,39 @@ $().ready(function(){
 		</div>
 	</div>
     <div class="form-group">
+        <label class="col-sm-3 control-label input-sm lbl-left">Hari Kerja (Sebulan)</label>
+		<div class="col-sm-8">
+		  <input class="form-control input-sm" type="number" name="hari_kerja_sebulan" placeholder="Hari Kerja (Sebulan)" value="26" min="1" max="31" value="" id="hk_sebulan" />
+		</div>
+	</div>
+    <div class="form-group">
+        <label class="col-sm-3 control-label input-sm lbl-left">Hari Kerja (2 Minggu)</label>
+		<div class="col-sm-8">
+		  <input class="form-control input-sm" type="number" name="hari_kerja_2minggu" placeholder="Hari Kerja 2 Minggu" value="12" min="1" max="14" value="" id="hk_2minggu" />
+		</div>
+	</div>
+	<input type="hidden" name="jam_kerja_2minggu" placeholder="Jam Kerja 2 Minggu" value="0" id="jk_2minggu" />
+	<input type="hidden" name="jenis" placeholder="Jenis Penggajian" value="0" id="jenis" />
+    <div class="form-group">
         <label class="col-sm-3 control-label input-sm lbl-left">Petugas</label>
 		<div class="col-sm-8">
-		  <input class="form-control input-sm" type="text" name="petugas" placeholder="Petugas" value="<?php echo $this->session->userdata('pengguna')->nama; ?>" readonly />
+		  <input class="form-control input-sm" type="text" name="petugas" placeholder="Petugas" value="<?php echo @$this->session->userdata('pengguna')->nama; ?>" readonly />
 		</div>
 	</div>
 </div>
 <div class="col-sm-6">
+    <div class="form-group">
+        <label class="col-sm-3 control-label input-sm lbl-left">Periode Sampai</label>
+		<div class="col-sm-7">
+           	<div class="input-group date" data-date="" data-date-format="yyyy-mm-dd">
+				<input class="form-control input-sm" type="text" name="periode_sampai" placeholder="Periode Sampai" value="<?php echo date('Y-m-d'); ?>" required readonly />
+				<span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+            </div>
+		</div>
+		<div class="col-sm-1">
+			<a href="#" class="btn btn-default btn-sm button-blue" id="cariTglPres">Cari</a>
+		</div>
+	</div>
     <div class="form-group">
         <label class="col-sm-3 control-label input-sm lbl-left">Nama</label>
 		<div class="col-sm-8">
@@ -242,7 +365,11 @@ $().ready(function(){
 			<textarea name="alamat" class="form-control" rows="3" placeholder="Alamat"></textarea>
 		</div>
 	</div>
+<<<<<<< HEAD
 	<input type="hidden" name="gaji2minggu" value="0">
+=======
+	<input type="hidden" name="gajitotal" value="0">
+>>>>>>> 2fef64a9322c3bc423955e405db935a1819b8092
 	<input type="hidden" name="tunj_jabatan" value="0">
 </div>
 

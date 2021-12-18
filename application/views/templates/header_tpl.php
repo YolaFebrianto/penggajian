@@ -13,7 +13,7 @@
 			<ul class="nav navbar-nav navbar-right">
 				<li class="no-dropdown"><a href="<?php echo site_url('/dashboard'); ?>">Beranda</a></li>
 				<li class="dropdown">
-					<a class="dropdown-toggle" data-toggle="dropdown" href="#"><?php echo $this->session->userdata('pengguna')->nama;?> <span class="caret"></span></a>
+					<a class="dropdown-toggle" data-toggle="dropdown" href="#"><?php echo @$this->session->userdata('pengguna')->nama;?> <span class="caret"></span></a>
 					<ul class="dropdown-menu">
 						<li><a href="<?php echo site_url('/account/ubah_password'); ?>">Ubah Password</a></li>
 						<li><a href="<?php echo site_url('/site/logout'); ?>">Logout</a></li>

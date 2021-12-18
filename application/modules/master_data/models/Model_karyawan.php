@@ -4,6 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Model_karyawan extends CI_Model {
 
 	public	$nama    	  = '';
+	public	$tgl_masuk 	  = '';
 	public	$alamat  	  = '';
 	public	$no_telp 	  = '';
 	public	$jk 	 	  = '';
@@ -48,9 +49,10 @@ class Model_karyawan extends CI_Model {
 		$query = "
 			SELECT ug.gajipokok,ug.tunj_jabatan,ug.gajiharian FROM karyawan AS k 
 			LEFT JOIN usulan_gaji AS ug 
-				ON ug.id_jabatan=k.id_jabatan AND ug.id_karyawan=k.id
+				ON ug.id_jabatan=k.id_jabatan
 			WHERE k.id='{$id}'
 		";
+		//AND ug.id_karyawan=k.id
 		$query = $this->db->query($query)->row();
 		return $query;
 	}

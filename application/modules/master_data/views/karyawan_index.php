@@ -7,8 +7,9 @@
 		<thead>
 			<tr>
 				<th width="10%">no</th>
-				<th width="20%">nama</th>
-				<th width="15%">jabatan</th>
+				<th width="15%">nama</th>
+				<th width="10%">jabatan</th>
+				<th width="10%">tgl masuk</th>
 				<th width="35%">alamat</th>
 				<th width="10%">no. telp</th>
 				<th width="10%">aksi</th>
@@ -23,6 +24,7 @@
 						<td align="center"><?php echo $no; ?></td>
 						<td><?php echo $record->nama; ?></td>
 						<td><?php echo $record->nama_jabatan; ?></td>
+						<td><?php echo $record->tgl_masuk; ?></td>
 						<td><?php echo $record->alamat; ?></td>
 						<td><?php echo $record->no_telp; ?></td>
 						<td align="center">

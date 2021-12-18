@@ -9,7 +9,8 @@
 				<th width="10%">no</th>
 				<th width="10%">kode</th>
 				<th width="50%">perkiraan</th>
-				<th width="20%">aktif</th>
+				<th width="10%">aktif</th>
+				<th width="10%">jenis</th>
 				<th width="10%">aksi</th>
 			</tr>
 		</thead>
@@ -23,6 +24,7 @@
 						<td><?php echo $record->kode; ?></td>
 						<td><?php echo $record->nama; ?></td>
 						<td align="center"><?php echo $record->aktif; ?></td>
+						<td align="center"><?php echo ($record->status==1)?'pendapatan':'potongan'; ?></td>
 						<td align="center">
 							<a href="<?php echo site_url('/master_data/perkiraan/edit/'.$record->id); ?>" title="Edit Data"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a>
 						</td>

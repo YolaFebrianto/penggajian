@@ -17,11 +17,24 @@ class Penggajian extends MX_Controller {
 			'perkiraan'		=> $this->db->get_where('perkiraan', array('aktif' => 'Y'))->result(),
 		));
 	}
+
+	public function jam_kerja(){			
+		$this->page->view('penggajian_jam_form', array(
+			'action'	 	=> $this->page->base_url("/insert_transaksi_gaji"),
+			'perkiraan'		=> $this->db->get_where('perkiraan', array('aktif' => 'Y'))->result(),
+		));
+	}
 	
 	public function insert_transaksi_gaji(){		
 		$no_slip = $this->input->post('no_slip');
 		$id_karyawan = $this->input->post('id_karyawan');
 		$tgl_gaji = $this->input->post('tgl_gaji');
+		$jenis = $this->input->post('jenis');
+		$hk_sebulan = $this->input->post('hari_kerja_sebulan');
+		$hk_2minggu = $this->input->post('hari_kerja_2minggu');
+		$jam_kerja = $this->input->post('jam_kerja_2minggu');
+		$periode_dari = $this->input->post('periode_dari');
+		$periode_sampai = $this->input->post('periode_sampai');
 		
 		if ($no_slip == '' || $id_karyawan == '' || $tgl_gaji == ''){
 			$this->session->set_flashdata('cek_field', 'failed');		
@@ -41,7 +54,13 @@ class Penggajian extends MX_Controller {
 				'pendapatan'  => $pendapatan,
 				'potongan'    => $potongan,
 				'gaji_bersih' => $gaji_bersih,
-				'id_pengguna_input' => $this->session->userdata('pengguna')->id, 
+				'id_pengguna_input' => $this->session->userdata('pengguna')->id,
+				'jenis'		  => $jenis, 
+				'hk_sebulan'  => $hk_sebulan,
+				'hk_2minggu'  => $hk_2minggu,
+				'jam_kerja'	  => $jam_kerja,
+				'periode_dari'=> $periode_dari,
+				'periode_sampai'=>$periode_sampai
 			);
 			$this->db->insert('transaksi_gaji', $data);
 			

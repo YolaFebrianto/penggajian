@@ -43,6 +43,17 @@ class Model_karyawan extends CI_Model {
 		$query = $this->db->query($query)->row();
 		return $query;
 	}
+
+	public function show_usulan_gaji($id){
+		$query = "
+			SELECT ug.gajipokok,ug.tunj_jabatan,ug.gajiharian FROM karyawan AS k 
+			LEFT JOIN usulan_gaji AS ug 
+				ON ug.id_jabatan=k.id_jabatan AND ug.id_karyawan=k.id
+			WHERE k.id='{$id}'
+		";
+		$query = $this->db->query($query)->row();
+		return $query;
+	}
 	
 }
 

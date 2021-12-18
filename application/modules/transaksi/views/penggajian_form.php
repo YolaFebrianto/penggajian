@@ -15,6 +15,9 @@ function add_penggajian_detail(e){
 	var status = $(this).attr('data-status');
 	var elemen = '';
 	var selektor = '';
+
+	var gaji2minggu=$('[name=gaji2minggu]').val();
+	var tunj_jabatan_val=$('[name=tunj_jabatan]').val();
 	
 	if (perkiraan_arr.indexOf(id_perkiraan) > -1) {
 		alert('Nama perkiraan gaji sudah terdaftar di tabel transaksi gaji!');
@@ -29,13 +32,21 @@ function add_penggajian_detail(e){
 		var elemen = 'potongan_arr';
 		var selektor = 'potongan_arr';
 	}
+
+	if(nama == 'Gaji Pokok'){
+		var isi_input = gaji2minggu;
+	} else if(nama =='Tunjangan Jabatan'){
+		var isi_input = tunj_jabatan_val;
+	} else {
+		var isi_input = '';
+	}
 	
 	num_unit++;
 	var perkiraan =
 		'<tr id="indent-perkiraan-' + id_perkiraan + '">' +
 			'<td>' + num_unit + '</td>' +
 			'<td class="nama-perkiraan">' + nama + '</td>' + 
-			'<td><input type="hidden" name="id_perkiraan[' + id_perkiraan + ']" value="' + id_perkiraan + '" /> <input type="text" name="' + elemen + '[' + id_perkiraan + ']" class="' + selektor + ' nominal-perkiraan" data-status="' + status + '" value="" autocomplete="off" /></td>' +
+			'<td><input type="hidden" name="id_perkiraan[' + id_perkiraan + ']" value="' + id_perkiraan + '" /> <input type="text" name="' + elemen + '[' + id_perkiraan + ']" class="' + selektor + ' nominal-perkiraan" data-status="' + status + '" value="'+ isi_input +'" autocomplete="off" /></td>' +
 			'<td align="center"><a href="#' + id_perkiraan + '" data-status="' + status + '" class="del"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>' +
 		'</tr>';
 	
@@ -159,7 +170,7 @@ function change_jumlah(){
 $().ready(function(){
 
 	$('[name=id_karyawan]').select2({width: '100%'}); 
-	$('.list-perkiraan').slimscroll({ height: '190px', alwaysVisible: true }); 
+	// $('.list-perkiraan').slimscroll({ height: '190px', alwaysVisible: true }); 
 		
 	$('[name=id_karyawan]').change(function() {
 		var id_karyawan = $(this).val();
@@ -174,6 +185,8 @@ $().ready(function(){
 					$('[name=nama]').val(karyawan[1]);
 					$('[name=alamat]').val(karyawan[2])
 					$('[name=jabatan]').val(karyawan[3]);
+					$('[name=gaji2minggu]').val(karyawan[4]);
+					$('[name=tunj_jabatan]').val(karyawan[6]);
 				}
 			);
 		}
@@ -229,6 +242,8 @@ $().ready(function(){
 			<textarea name="alamat" class="form-control" rows="3" placeholder="Alamat"></textarea>
 		</div>
 	</div>
+	<input type="hidden" name="gaji2minggu" value="0">
+	<input type="hidden" name="tunj_jabatan" value="0">
 </div>
 
 <div class="clearfix"></div>
@@ -263,7 +278,7 @@ $().ready(function(){
 	</div>
 </div>
 <div class="col-sm-4">
-	<div class="list-perkiraan">
+	<div class="list-perkiraan" style="height: 190px;overflow: scroll;">
 		<ul>
 			<?php foreach($perkiraan as $p) : ?>
 				<li><a class="add" href="<?php echo $p->id; ?>" data-kode="<?php echo $p->kode; ?>" data-nama="<?php echo $p->nama; ?>" data-status="<?php echo $p->status; ?>"><?php echo $p->nama; ?></a></li>

@@ -45,13 +45,6 @@ function add_penggajian_detail(e){
 	}
 
 	if(nama == 'Gaji Pokok'){
-<<<<<<< HEAD
-		var isi_input = gaji2minggu;
-	} else if(nama =='Tunjangan Jabatan'){
-		var isi_input = tunj_jabatan_val;
-	} else {
-		var isi_input = '';
-=======
 		var isi_input = Math.ceil(gajitotal/hari_kerja_sebulan*hari_kerja_2minggu);
 		var data_id = 'id="input-gaji-pokok"';
 	} else if(nama =='Tunjangan Jabatan'){
@@ -71,7 +64,6 @@ function add_penggajian_detail(e){
 	} else {
 		var isi_input = '';
 		var data_id = '';
->>>>>>> 2fef64a9322c3bc423955e405db935a1819b8092
 	}
 	
 	num_unit++;
@@ -79,11 +71,7 @@ function add_penggajian_detail(e){
 		'<tr id="indent-perkiraan-' + id_perkiraan + '">' +
 			'<td>' + num_unit + '</td>' +
 			'<td class="nama-perkiraan">' + nama + '</td>' + 
-<<<<<<< HEAD
-			'<td><input type="hidden" name="id_perkiraan[' + id_perkiraan + ']" value="' + id_perkiraan + '" /> <input type="text" name="' + elemen + '[' + id_perkiraan + ']" class="' + selektor + ' nominal-perkiraan" data-status="' + status + '" value="'+ isi_input +'" autocomplete="off" /></td>' +
-=======
 			'<td><input type="hidden" name="id_perkiraan[' + id_perkiraan + ']" value="' + id_perkiraan + '" /> <input type="text" name="' + elemen + '[' + id_perkiraan + ']" class="' + selektor + ' nominal-perkiraan" data-status="' + status + '" value="'+ isi_input +'" autocomplete="off" '+ data_id +' /></td>' +
->>>>>>> 2fef64a9322c3bc423955e405db935a1819b8092
 			'<td align="center"><a href="#' + id_perkiraan + '" data-status="' + status + '" class="del"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>' +
 		'</tr>';
 	
@@ -227,14 +215,9 @@ $().ready(function(){
 					$('[name=nama]').val(karyawan[1]);
 					$('[name=alamat]').val(karyawan[2])
 					$('[name=jabatan]').val(karyawan[3]);
-<<<<<<< HEAD
-					$('[name=gaji2minggu]').val(karyawan[4]);
-					$('[name=tunj_jabatan]').val(karyawan[6]);
-=======
 					$('[name=gajitotal]').val(karyawan[4]);
 					$('[name=tunj_jabatan]').val(karyawan[5]);
 					$('[name=hari_kerja_2minggu]').val(karyawan[6]);
->>>>>>> 2fef64a9322c3bc423955e405db935a1819b8092
 				}
 			);
 		}
@@ -365,11 +348,7 @@ $().ready(function(){
 			<textarea name="alamat" class="form-control" rows="3" placeholder="Alamat"></textarea>
 		</div>
 	</div>
-<<<<<<< HEAD
-	<input type="hidden" name="gaji2minggu" value="0">
-=======
 	<input type="hidden" name="gajitotal" value="0">
->>>>>>> 2fef64a9322c3bc423955e405db935a1819b8092
 	<input type="hidden" name="tunj_jabatan" value="0">
 </div>
 
